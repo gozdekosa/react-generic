@@ -1,0 +1,50 @@
+
+import SortIcon from "./SortIcon";
+
+
+const UserTable = ({sortConfig, handleSort, processedUsers, columns }) => {
+
+
+    return (
+        <div>
+            <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-md border border-default border-neutral-200">
+                <table className="w-full text-sm text-left rtl:text-right text-body">
+                    <thead className="text-sm text-body bg-neutral-100 border-b rounded-md border-default border-neutral-200">
+                        <tr>
+                           {columns.map((col) => (
+                            <th key={col.key} className="px-6 py-3 font-medium">
+                                <button
+                                onClick={() => handleSort(col.key)}
+                                className="flex items-center gap-1"
+                                >
+                                {col.label}
+
+                                <SortIcon
+                                    active={sortConfig?.key === col.key}
+                                    direction={sortConfig?.direction ?? undefined}
+                                />
+                                </button>
+                            </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {processedUsers.map((user) => (
+                        <tr
+                        key={user.id}
+                        className="bg-neutral-primary border-b border-default border-neutral-200"
+                        >
+                        <th className="px-6 py-4">{user.id}</th>
+                        <td className="px-6 py-4">{user.name}</td>
+                        <td className="px-6 py-4">{user.username}</td>
+                        <td className="px-6 py-4">{user.email}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
+
+export default UserTable;
