@@ -5,6 +5,7 @@ import Layout from "../layouts/Layout"
 import Posts from "../../features/posts/pages/Posts"
 import Login from "../../pages/Login"
 import Users from "../../features/users/pages/Users"
+import ProfilePage from "../../features/profile/pages/ProfilePage"
 
 const ConfigRouter = () => {
     return(
@@ -13,6 +14,7 @@ const ConfigRouter = () => {
                 <Route index element={<Home />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/posts" element={<Posts />} />
+                <Route path="/profile" element={<ProfilePage />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<ErrorPage />} />

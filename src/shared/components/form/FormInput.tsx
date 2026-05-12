@@ -1,12 +1,11 @@
-type Props = {
+type Props =
+  React.InputHTMLAttributes<HTMLInputElement> & {
     label: string;
-    type?: string;
-    placeholder?: string;
-    value: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-};
+    error?: string;
+  };
 
-const FormInput = ({ label, type = "text", placeholder, value, onChange }: Props) => {
+
+const FormInput = ({ label,error, ...props }: Props) => {
     return (
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -14,12 +13,10 @@ const FormInput = ({ label, type = "text", placeholder, value, onChange }: Props
       </label>
 
       <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
+        {...props}
         className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
       />
+      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
     </div>
     );
 }

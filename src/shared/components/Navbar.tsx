@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Navbar = ({ isOpen, setIsOpen }) => {
@@ -47,9 +48,9 @@ const Navbar = ({ isOpen, setIsOpen }) => {
                                 </div>
 
                                 <ul className="p-2 text-sm text-body font-medium">
-                                    <li><a href="#" className="block p-2 hover:bg-gray-100 rounded">Dashboard</a></li>
+                                    <Link to="/" className="block p-2 hover:bg-gray-100 rounded"><span>Dashboard</span></Link>
                                     <li><a href="#" className="block p-2 hover:bg-gray-100 rounded">Settings</a></li>
-                                    <li><a href="#" className="block p-2 hover:bg-gray-100 rounded">Earnings</a></li>
+                                    <Link to="/profile" className="block p-2 hover:bg-gray-100 rounded"><span>Profile</span></Link>
                                     <li><a href="#" className="block p-2 hover:bg-gray-100 rounded">Sign out</a></li>
                                 </ul>
 
