@@ -1,4 +1,13 @@
+import { useState } from "react";
+import FormInput from "../shared/components/form/FormInput";
+import Button from "../shared/components/ui/Button";
+import FormCheckbox from "../shared/components/form/FormCheckbox";
+
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md space-y-8 rounded-2xl bg-white p-8 shadow-xl ring-1 ring-gray-200">
@@ -13,44 +22,40 @@ const Login = () => {
         <form className="mt-8 space-y-6">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Kullanıcı Adı
-              </label>
-              <input
-                type="text"
-                placeholder="kullanici@mail.com"
-                className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              <FormInput
+                label="Email"
+                placeholder="mail@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Şifre
-              </label>
-              <input
+              <FormInput
+                label="Şifre"
                 type="password"
-                placeholder="••••••••"
-                className="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                placeholder="Şifrenizi girin"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
 
           <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center text-gray-600">
-              <input type="checkbox" className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-              <span className="ml-2">Beni hatırla</span>
-            </label>
+            <FormCheckbox
+              label="Beni hatırla"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
             <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
               Şifremi unuttum
             </a>
           </div>
-
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-md transition duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-[0.98]"
-          >
+          
+          <Button type="submit" className="w-full">
             Giriş Yap
-          </button>
+          </Button>
+
         </form>
 
         <p className="text-center text-sm text-gray-500">
