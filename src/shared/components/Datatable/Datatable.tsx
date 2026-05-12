@@ -1,10 +1,6 @@
-
 import SortIcon from "./SortIcon";
 
-
-const UserTable = ({sortConfig, handleSort, processedUsers, columns }) => {
-
-
+const DataTable = ({sortConfig, handleSort, processedUsers, columns }) => {
     return (
         <div>
             <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-md border border-default border-neutral-200">
@@ -29,15 +25,16 @@ const UserTable = ({sortConfig, handleSort, processedUsers, columns }) => {
                         </tr>
                     </thead>
                     <tbody>
-                    {processedUsers.map((user) => (
-                        <tr
-                        key={user.id}
-                        className="bg-neutral-primary border-b border-default border-neutral-200"
-                        >
-                        <th className="px-6 py-4">{user.id}</th>
-                        <td className="px-6 py-4">{user.name}</td>
-                        <td className="px-6 py-4">{user.username}</td>
-                        <td className="px-6 py-4">{user.email}</td>
+                    {processedUsers.map((row, index) => (
+                        <tr key={index}>
+                        {columns.map((col) => (
+                            <td
+                            key={String(col.key)}
+                            className="px-6 py-4"
+                            >
+                            {String(row[col.key])}
+                            </td>
+                        ))}
                         </tr>
                     ))}
                     </tbody>
@@ -47,4 +44,4 @@ const UserTable = ({sortConfig, handleSort, processedUsers, columns }) => {
     );
 };
 
-export default UserTable;
+export default DataTable;

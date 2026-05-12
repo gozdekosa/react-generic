@@ -3,7 +3,7 @@ type Props = {
     setSearch: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const UserSearch = ({ search, setSearch }: Props) => {
+const Search = ({ search, setSearch }: Props) => {
    return (
         <input
         type="text"
@@ -15,4 +15,4 @@ const UserSearch = ({ search, setSearch }: Props) => {
    );
 };
 
-export default UserSearch;
+export default Search;

@@ -1,6 +1,6 @@
 
-import UserSearch from "../components/UserSearch";
-import UserTable from "../components/UserTable";
+import DataTable from "../../../shared/components/Datatable/Datatable";
+import Search from "../../../shared/components/Datatable/Search";
 import useUsers from "../hooks/useUsers";
 import useUserTable from "../hooks/UseUserTable";
 
@@ -19,8 +19,8 @@ const User = () => {
     return (
         <div>
             <h1 className="text-2xl font-bold mb-4">Users</h1>
-            <UserSearch search={search} setSearch={setSearch} />
-            <UserTable 
+            <Search search={search} setSearch={setSearch} />
+            <DataTable 
                 sortConfig={sortConfig}
                 handleSort={handleSort}
                 processedUsers={processedUsers}
