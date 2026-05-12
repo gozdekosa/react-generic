@@ -38,31 +38,37 @@ const ProfileForm = ({ user }: Props) => {
         alert("Profil güncellendi!");
     };
 
+    const fields = [
+    {
+        name: "name",
+        label: "Ad Soyad",
+        type: "text",
+    },
+    {
+        name: "email",
+        label: "Email",
+        type: "email",
+    },
+    {
+        name: "username",
+        label: "Kullanıcı Adı",
+        type: "text",
+    },
+    ] as const;
+
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
                 <div className="space-y-4">
-                <div>
+                {fields.map((field) => (
                     <FormInput
-                        label="Ad Soyad"
-                        {...register("name")}
-                        error={errors.name?.message}
+                    key={field.name}
+                    label={field.label}
+                    type={field.type}
+                    {...register(field.name)}
+                    error={errors[field.name]?.message}
                     />
-                </div>
-                <div>
-                    <FormInput
-                        label="Email:"
-                        {...register("email")}
-                        error={errors.email?.message}
-                    />
-                </div>
-                <div>
-                    <FormInput
-                        label="Kullanıcı Adı:"
-                        {...register("username")}
-                        error={errors.username?.message}
-                    />
-                </div>
+                ))}
                 <Button type="submit" disabled={loading}>
                     {loading ? "Güncelleniyor..." : "Profili Güncelle"}
                 </Button>
