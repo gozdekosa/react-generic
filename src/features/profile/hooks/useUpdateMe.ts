@@ -5,9 +5,7 @@ import type { User } from "../types/profile";
 const useUpdateMe = () => {
   const [loading, setLoading] = useState(false);
 
-  const handleUpdate = async (
-    data: Partial<User>
-  ) => {
+  const handleUpdate = async (data: Partial<User>) => {
     try {
       setLoading(true);
 
