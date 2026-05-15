@@ -1,6 +1,6 @@
 import SortIcon from "./SortIcon";
 
-const DataTable = ({sortConfig, handleSort, processedUsers, columns }) => {
+const DataTable = ({sortConfig, handleSort, processedList, columns }) => {
     return (
         <div>
             <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs bg-neutral-100 dark:bg-neutral-900 rounded-md border border-default border-neutral-200 dark:border-gray-700">
@@ -25,7 +25,7 @@ const DataTable = ({sortConfig, handleSort, processedUsers, columns }) => {
                         </tr>
                     </thead>
                     <tbody>
-                    {processedUsers.map((row, index) => (
+                    {processedList.map((row, index) => (
                         <tr key={index}>
                         {columns.map((col) => (
                             <td

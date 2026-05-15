@@ -1,24 +1,35 @@
+import DataTable from "../../../shared/components/Datatable/Datatable";
+import Search from "../../../shared/components/Datatable/Search";
 import usePosts from "../hooks/usePosts";
+import usePostTable from "../hooks/UsePostTable";
 
 const PostList = () => {
-  const { posts, loading, lastPostRef } = usePosts();
+    const { posts,loading, lastPostRef } = usePosts();
+
+    const {
+        search,
+        setSearch,
+        sortConfig,
+        handleSort,
+        processedPosts,
+        columns,
+    } = usePostTable(posts);
 
   return (
-    <div>
-      {posts.map((post, index) => {
-        if (index === posts.length - 1) {
-          return (
-            <div ref={lastPostRef} key={post.id}>
-              {post.title}
-            </div>
-          );
-        }
+        <div>
+            <h1 className="text-2xl font-bold mb-4">Posts</h1>
+            <Search search={search} setSearch={setSearch} />
+            <DataTable
+                sortConfig={sortConfig}
+                handleSort={handleSort}
+                processedList={processedPosts}
+                columns={columns}
+            />
+            <div ref={lastPostRef} className="h-10" />
 
-        return <div key={post.id}>{post.title}</div>;
-      })}
+            {loading && <p>Loading...</p>}
+        </div>
 
-      {loading && <p>Loading...</p>}
-    </div>
   );
 };
 

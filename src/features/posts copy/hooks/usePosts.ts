@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { fetchPosts } from "../api/postsApi";
 import type { Post } from "../types/post";
 
-const LIMIT = 10;
+const LIMIT = 5;
 
 const usePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);

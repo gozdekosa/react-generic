@@ -23,7 +23,7 @@ const User = () => {
             <DataTable 
                 sortConfig={sortConfig}
                 handleSort={handleSort}
-                processedUsers={processedUsers}
+                processedList={processedUsers}
                 columns={columns}
             />
         </div>
