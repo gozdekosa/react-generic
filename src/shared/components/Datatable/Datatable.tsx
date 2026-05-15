@@ -3,9 +3,9 @@ import SortIcon from "./SortIcon";
 const DataTable = ({sortConfig, handleSort, processedUsers, columns }) => {
     return (
         <div>
-            <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-md border border-default border-neutral-200">
+            <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs bg-neutral-100 dark:bg-neutral-900 rounded-md border border-default border-neutral-200 dark:border-gray-700">
                 <table className="w-full text-sm text-left rtl:text-right text-body">
-                    <thead className="text-sm text-body bg-neutral-100 border-b rounded-md border-default border-neutral-200">
+                    <thead className="text-sm text-body bg-neutral-100 dark:bg-neutral-900 border-b rounded-md border-default border-neutral-200 dark:border-gray-700">
                         <tr>
                            {columns.map((col) => (
                             <th key={col.key} className="px-6 py-3 font-medium">

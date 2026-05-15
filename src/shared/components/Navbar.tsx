@@ -7,7 +7,7 @@ const Navbar = ({ isOpen, setIsOpen }) => {
 
     return (
         <>
-        <nav className="fixed top-0 z-50 w-full bg-neutral-primary-soft border-b border-default border-gray-200">
+        <nav className="fixed top-0 z-50 w-full bg-white text-black dark:bg-black dark:text-white border-b border-default border-gray-200 dark:border-gray-700">
             <div className="px-3 py-3 lg:px-5 lg:pl-3">
                 <div className="flex items-center justify-between">
                 <div className="flex items-center justify-start rtl:justify-end">
@@ -40,18 +40,18 @@ const Navbar = ({ isOpen, setIsOpen }) => {
                             </button>
 
                             {isDropdownOpen && (
-                                <div className="absolute right-0 mt-2 z-50 bg-white border border-default-medium rounded-base shadow-lg w-44">
+                                <div className="absolute right-0 mt-2 z-50 bg-white text-black dark:bg-black dark:text-white border border-gray-200 dark:border-gray-700 border-default-medium rounded-base shadow-lg w-44">
                                 
-                                <div className="px-4 py-3 border-b border-default-medium">
+                                <div className="px-4 py-3 border-b border-default-medium border-gray-200 dark:border-gray-700">
                                     <p className="text-sm font-medium text-heading">Neil Sims</p>
                                     <p className="text-sm text-body truncate">neil.sims@flowbite.com</p>
                                 </div>
 
                                 <ul className="p-2 text-sm text-body font-medium">
-                                    <Link to="/" className="block p-2 hover:bg-gray-100 rounded"><span>Dashboard</span></Link>
-                                    <li><a href="#" className="block p-2 hover:bg-gray-100 rounded">Settings</a></li>
-                                    <Link to="/profile" className="block p-2 hover:bg-gray-100 rounded"><span>Profile</span></Link>
-                                    <li><a href="#" className="block p-2 hover:bg-gray-100 rounded">Sign out</a></li>
+                                    <Link to="/" className="block p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"><span>Dashboard</span></Link>
+                                    <Link to="/settings" className="block p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"><span>Settings</span></Link>
+                                    <Link to="/profile" className="block p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"><span>Profile</span></Link>
+                                    <li><a href="#" className="block p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Sign out</a></li>
                                 </ul>
 
                                 </div>

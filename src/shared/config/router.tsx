@@ -6,6 +6,7 @@ import Posts from "../../features/posts/pages/Posts"
 import Login from "../../pages/Login"
 import Users from "../../features/users/pages/Users"
 import ProfilePage from "../../features/profile/pages/ProfilePage"
+import SettingsPage from "../../features/settings/pages/SettingsPage"
 
 const ConfigRouter = () => {
     return(
@@ -15,6 +16,7 @@ const ConfigRouter = () => {
                 <Route path="/users" element={<Users />} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/settings" element={<SettingsPage />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<ErrorPage />} />

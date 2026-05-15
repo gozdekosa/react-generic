@@ -22,8 +22,7 @@ type Props = {
 const ThemeProvider = ({ children }: Props) => {
     const [theme, setTheme] =
         useState<Theme>(() => {
-            const savedTheme =
-            localStorage.getItem("theme");
+            const savedTheme = localStorage.getItem("theme");
 
             return savedTheme === "dark"
             ? "dark"
