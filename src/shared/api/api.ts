@@ -1,14 +1,19 @@
 import axios from "axios";
 
+let accessToken: string | null = null;
+
+export const setAccessToken = (token: string | null) => {
+  accessToken = token;
+};
+
 const API = axios.create({
   baseURL: "http://localhost:5000",
+  withCredentials: true,
 });
 
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
 
   return config;
@@ -17,11 +22,6 @@ API.interceptors.request.use((config) => {
 API.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      window.location.href = "/login";
-    }
-
     return Promise.reject(error);
   }
 );

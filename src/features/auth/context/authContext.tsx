@@ -5,6 +5,8 @@ import {
   type ReactNode,
 } from "react";
 
+import API from "../../../shared/api/api";
+
 type AuthContextType = {
   token: string | null;
   isAuthenticated: boolean;
@@ -19,28 +21,42 @@ type Props = {
 };
 
 const AuthProvider = ({ children }: Props) => {
-  const [token, setToken] = useState<string | null>(() => {
-    return localStorage.getItem("token");
-  });
+  // ✅ token sadece memory'de
+  const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [initialized, setInitialized] = useState(false);
 
   const login = (newToken: string) => {
     setToken(newToken);
-    localStorage.setItem("token", newToken);
   };
 
-  const logout = () => {
+  const refreshAuth = async () => {
+    try {
+      const res = await API.post("/refresh");
+
+      setToken(res.data.accessToken);
+    } catch (err) {
+      setToken(null);
+    } finally {
+      setLoading(false);
+      setInitialized(true);
+    }
+  };
+
+  const logout = async () => {
+    await API.post("/logout");
     setToken(null);
-    localStorage.removeItem("token");
+    setInitialized(true);
+    setLoading(false);
   };
 
   useEffect(() => {
-    // refresh sync (opsiyonel ama temiz)
-    const storedToken = localStorage.getItem("token");
-
-    if (storedToken && !token) {
-      setToken(storedToken);
+    if (!initialized) {
+      refreshAuth();
     }
-  }, [token]);
+  }, []);
+
+  if (loading) return null;
 
   return (
     <AuthContext.Provider
@@ -51,7 +67,7 @@ const AuthProvider = ({ children }: Props) => {
         logout,
       }}
     >
-      {children}
+      {initialized ? children : null}
     </AuthContext.Provider>
   );
 };
