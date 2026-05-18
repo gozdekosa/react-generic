@@ -1,59 +1,32 @@
-import {
-  createContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useEffect, useState } from "react";
+import { authApi } from "../api/authApi";
 
-import API from "../../../shared/api/api";
+export const AuthContext = createContext(null);
 
-type AuthContextType = {
-  token: string | null;
-  isAuthenticated: boolean;
-  login: (token: string) => void;
-  logout: () => void;
-};
-
-export const AuthContext = createContext<AuthContextType | null>(null);
-
-type Props = {
-  children: ReactNode;
-};
-
-const AuthProvider = ({ children }: Props) => {
-  // ✅ token sadece memory'de
-  const [token, setToken] = useState<string | null>(null);
+const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [initialized, setInitialized] = useState(false);
 
-  const login = (newToken: string) => {
-    setToken(newToken);
+  const login = (t) => setToken(t);
+
+  const logout = async () => {
+    await authApi.logout();
+    setToken(null);
   };
 
   const refreshAuth = async () => {
     try {
-      const res = await API.post("/refresh");
-
+      const res = await authApi.refresh();
       setToken(res.data.accessToken);
-    } catch (err) {
+    } catch {
       setToken(null);
     } finally {
       setLoading(false);
-      setInitialized(true);
     }
-  };
-
-  const logout = async () => {
-    await API.post("/logout");
-    setToken(null);
-    setInitialized(true);
-    setLoading(false);
   };
 
   useEffect(() => {
-    if (!initialized) {
-      refreshAuth();
-    }
+    refreshAuth();
   }, []);
 
   if (loading) return null;
@@ -67,7 +40,7 @@ const AuthProvider = ({ children }: Props) => {
         logout,
       }}
     >
-      {initialized ? children : null}
+      {children}
     </AuthContext.Provider>
   );
 };

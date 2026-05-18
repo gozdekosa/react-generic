@@ -9,6 +9,7 @@ import SettingsPage from "../../features/settings/pages/SettingsPage"
 import LoginPage from "../../features/auth/pages/LoginPage"
 import ProtectedRoute from "../../routes/ProtectedRoute"
 import PublicRoute from "../../routes/PublicRoute"
+import RegisterPage from "../../features/auth/pages/RegisterPage"
 
 const ConfigRouter = () => {
     return(
@@ -35,6 +36,7 @@ const ConfigRouter = () => {
                     </PublicRoute>
                 }
             />
+            <Route path="register" element={<RegisterPage />} />
             <Route path="*" element={<ErrorPage />} />
         </Routes>
     )
