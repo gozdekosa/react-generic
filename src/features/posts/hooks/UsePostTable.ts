@@ -5,6 +5,12 @@ type Post = {
     id: number;
     title: string;
     body: string;
+    userId: number;
+};
+
+type User = {
+    id: number;
+    name: string;
 };
 
 type SortKey = "id" | "title" | "body";
@@ -14,7 +20,7 @@ type SortConfig = {
   direction: "asc" | "desc";
 } | null;
 
-const usePostTable = (posts: Post[]) => {
+const usePostTable = (posts: Post[], users: User[]) => {
     const [search, setSearch] = useState("");
     const debouncedSearch = useDebounce(search, 400);
     const [sortConfig, setSortConfig] = useState<SortConfig>(null);
@@ -34,6 +40,16 @@ const usePostTable = (posts: Post[]) => {
             };
         });
     };
+
+    const userMap = useMemo(() => {
+        const map = new Map<number, string>();
+
+        users.forEach((user) => {
+            map.set(user.id, user.name);
+        });
+
+        return map;
+    }, [users]);
 
     const processedPosts = useMemo(() => {
         let result = [...posts];
@@ -69,13 +85,17 @@ const usePostTable = (posts: Post[]) => {
             });
         }
 
-    return result;
-    }, [posts, debouncedSearch, sortConfig]);
+    return result.map((post) => ({
+        ...post,
+        userName: userMap.get(post.userId) || "Unknown",
+    }));
+    }, [posts, debouncedSearch, sortConfig, userMap]);
 
     const columns = [
     { key: "id", label: "ID" },
     { key: "title", label: "BAŞLIK" },
     { key: "body", label: "İÇERİK" },
+    { key: "userName", label: "KULLANICI" },
     ] as const;
 
     return { search, setSearch, processedPosts, handleSort, sortConfig, columns };

@@ -3,22 +3,38 @@ import ErrorPage from "../../pages/Error"
 import Home from "../../pages/Home"
 import Layout from "../layouts/Layout"
 import Posts from "../../features/posts/pages/Posts"
-import Login from "../../pages/Login"
 import Users from "../../features/users/pages/Users"
 import ProfilePage from "../../features/profile/pages/ProfilePage"
 import SettingsPage from "../../features/settings/pages/SettingsPage"
+import LoginPage from "../../features/auth/pages/LoginPage"
+import ProtectedRoute from "../../routes/ProtectedRoute"
+import PublicRoute from "../../routes/PublicRoute"
 
 const ConfigRouter = () => {
     return(
         <Routes>
-            <Route path="/" element={<Layout />}>
+              <Route
+                    path="/"
+                    element={
+                    <ProtectedRoute>
+                        <Layout />
+                    </ProtectedRoute>
+                    }
+                >
                 <Route index element={<Home />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element={<SettingsPage />} />
             </Route>
-            <Route path="/login" element={<Login />} />
+            <Route
+                path="/login"
+                element={
+                    <PublicRoute>
+                    <LoginPage />
+                    </PublicRoute>
+                }
+            />
             <Route path="*" element={<ErrorPage />} />
         </Routes>
     )

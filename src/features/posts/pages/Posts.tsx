@@ -1,10 +1,12 @@
 import DataTable from "../../../shared/components/Datatable/Datatable";
 import Search from "../../../shared/components/Datatable/Search";
+import useUsers from "../../users/hooks/useUsers";
 import usePosts from "../hooks/usePosts";
 import usePostTable from "../hooks/UsePostTable";
 
 const PostList = () => {
-    const { posts,loading, lastPostRef } = usePosts();
+    const { posts, loading, lastPostRef } = usePosts();
+    const { users } = useUsers();
 
     const {
         search,
@@ -13,7 +15,7 @@ const PostList = () => {
         handleSort,
         processedPosts,
         columns,
-    } = usePostTable(posts);
+    } = usePostTable(posts, users);
 
   return (
         <div>

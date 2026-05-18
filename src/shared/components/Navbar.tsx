@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Navbar = ({ isOpen, setIsOpen }) => {
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login", { replace: true });
+    };
 
     var [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -51,7 +58,14 @@ const Navbar = ({ isOpen, setIsOpen }) => {
                                     <Link to="/" className="block p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"><span>Dashboard</span></Link>
                                     <Link to="/settings" className="block p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"><span>Settings</span></Link>
                                     <Link to="/profile" className="block p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"><span>Profile</span></Link>
-                                    <li><a href="#" className="block p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Sign out</a></li>
+                                    <li>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="block w-full text-left p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                                        >
+                                            Sign out
+                                        </button>
+                                    </li>
                                 </ul>
 
                                 </div>
