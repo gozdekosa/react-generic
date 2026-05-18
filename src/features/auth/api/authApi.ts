@@ -1,29 +1,6 @@
-type LoginPayload = {
-  email: string;
-  password: string;
-};
+import API from "../../../shared/api/api";
 
-type LoginResponse = {
-  accessToken: string;
-  user: {
-    id: number;
-    email: string;
-  };
-};
-
-export const login = async (data: LoginPayload): Promise<LoginResponse> => {
-  // fake delay
-  await new Promise((r) => setTimeout(r, 500));
-
-  if (data.email !== "test@test.com" || data.password !== "123456") {
-    throw new Error("Invalid credentials");
-  }
-
-  return {
-    accessToken: "fake-jwt-token-123",
-    user: {
-      id: 1,
-      email: data.email,
-    },
-  };
+export const login = async (data: { email: string; password: string }) => {
+   const res = await API.post("/login", data);
+  return res.data;
 };

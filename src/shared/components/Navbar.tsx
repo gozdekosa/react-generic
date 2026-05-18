@@ -1,12 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../features/auth/hooks/useAuth";
 
 const Navbar = ({ isOpen, setIsOpen }) => {
 
     const navigate = useNavigate();
+    const { logout } = useAuth();
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
+        logout();
         navigate("/login", { replace: true });
     };
 

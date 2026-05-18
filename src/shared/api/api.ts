@@ -1,11 +1,10 @@
 import axios from "axios";
 
-export const api = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
+const API = axios.create({
+  baseURL: "http://localhost:5000",
 });
 
-// request interceptor
-api.interceptors.request.use((config) => {
+API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -14,3 +13,17 @@ api.interceptors.request.use((config) => {
 
   return config;
 });
+
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+export default API;

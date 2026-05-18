@@ -7,10 +7,13 @@ import { LoginSchema, type LoginFormData } from "../schema/LoginSchema";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/authApi";
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+
 
 const LoginForm = () => {
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const { login: setAuth } = useAuth();
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormData>({
         resolver: zodResolver(LoginSchema),
             defaultValues: {
@@ -25,7 +28,7 @@ const LoginForm = () => {
             setError(null);
             const res = await login(data);
 
-            localStorage.setItem("token", res.accessToken);
+            setAuth(res.accessToken);
 
             navigate("/");
         } catch (err) {
